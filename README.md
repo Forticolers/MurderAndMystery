@@ -128,6 +128,10 @@ Violet --> Modulable, Dépendant des actions utilisateurs (Utilisateur presse su
 
 Noir --> Interactif par l'utilisateur (Boutons / liens / inputs)
 
+Vert --> Arrière-plan (Lors d'un clique sur l'arrière plan : Annulation de l'action dans le cas de la sélection d'un personnage par exemple ou retour au dit-arrière plan pour les message informatif)
+
+Orange --> Premier-plan (pop-ups, possibilité de bloqué le retour à l'arrière plan tant que l'utilisateur de clique pas sur le bouton désigné)
+
 Commence avec un login ou l'utilisateur entre un code fournis par les administrateurs
 
 ![Login sketch](Sketches/user_enter_login_code.png)

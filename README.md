@@ -149,7 +149,7 @@ Avec une url de type `<www.domain.ch>/web-app/game/character/<code de connexion 
 
 ![Character infos](Sketches/user_character_info.png)
 
-Les fiches de personnages sont générer par les administrateur (C.F [Admin part](#Admin part) ) avec customisation des zones modulables. 
+Les fiches de personnages sont générer par les administrateur avec customisation des zones modulables. 
 
 Les utilisateurs peuvent ouvrir leur inventaire en appuyant sur la flèche.
 

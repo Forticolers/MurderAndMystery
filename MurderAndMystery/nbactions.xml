@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-checkstyle</actionName>
+            <displayName>checkstyle</displayName>
+            <goals>
+                <goal>checkstyle:checkstyle</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-test</actionName>
+            <displayName>test</displayName>
+            <goals>
+                <goal>test</goal>
+                <goal>-fn</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath ${packageClassName}</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>debug</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath ${packageClassName}</exec.args>
+                <exec.executable>java</exec.executable>
+                <jpda.listen>true</jpda.listen>
+            </properties>
+        </action>
+        <action>
+            <actionName>profile</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath ${packageClassName}</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-mvn all</actionName>
+            <displayName>mvn all</displayName>
+            <goals>
+                <goal>validate</goal>
+                <goal>compile</goal>
+                <goal>test</goal>
+                <goal>package</goal>
+                <goal>verify</goal>
+                <goal>install</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-mvn all 2</actionName>
+            <displayName>mvn all 2</displayName>
+            <goals>
+                <goal>checkstyle:checkstyle</goal>
+                <goal>validate</goal>
+                <goal>compile</goal>
+                <goal>test</goal>
+                <goal>package</goal>
+                <goal>install</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-install</actionName>
+            <displayName>install</displayName>
+            <goals>
+                <goal>install</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM---e</actionName>
+            <displayName>--e</displayName>
+            <goals>
+                <goal>checkstyle:checkstyle</goal>
+                <goal>validate</goal>
+                <goal>compile</goal>
+                <goal>test</goal>
+                <goal>package</goal>
+                <goal>install</goal>
+                <goal>-e</goal>
+            </goals>
+        </action>
+    </actions>

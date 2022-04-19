@@ -1,2 +1,5 @@
 *.docx
 /MurderAndMystery/nbproject/
+/MurderAndMystery/target/
+/murderandmysteryapp/nbproject/
+/murderandmysteryapp/target/

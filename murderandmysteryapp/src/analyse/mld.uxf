@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>288</x>
+      <y>120</y>
+      <w>222</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>_Murder &amp; Mystery - MLD_
+Julien Jeanbourquin (Julien Jeanbourquin AT hotmail.com)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>468</y>
+      <w>270</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+Objet
+--
+&lt;&lt;PK&gt;&gt;uuid: UUID {aid}
+&lt;&lt;M&gt;&gt;&lt;&lt;VO&gt;&gt;version: INTEGER DEFAULT 1
+&lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;nom: TEXT {string}
+description: TEXT {string}
+ramassable: BOOL {boolean}
+image: BYTEA {BLOG}
+
+&lt;&lt;ADC&gt;&gt;date_creation: TIMESTAMP DEFAULT now()
+&lt;&lt;AUC&gt;&gt;user_creation: TEXT
+&lt;&lt;ADM&gt;&gt;date_modification: TIMESTAMP
+&lt;&lt;AUM&gt;&gt;user_modification: TEXT
+&lt;&lt;ADD&gt;&gt;date_suppression: TIMESTAMP
+&lt;&lt;AMD&gt;&gt;user_suppression: TEXT
+--
+&lt;&lt;PK&gt;&gt;PK_objet(uuid)
+&lt;&lt;U-1&gt;&gt;NID1_objet_nom(nom)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>480</y>
+      <w>222</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+Competence
+--
+&lt;&lt;PK&gt;&gt;uuid: UUID {aid}
+&lt;&lt;M&gt;&gt;&lt;&lt;VO&gt;&gt;version: INTEGER DEFAULT 1
+&lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;nom: TEXT {string}
+image: BYTEA {BLOG}
+couleur: TEXT {string}
+retour_user: TEXT {string}
+retour_target: TEXT {string}
+cooldown: INTEGER {positiveinInteger}
+hasTarget: BOOL {boolean}
+
+&lt;&lt;ADC&gt;&gt;date_creation: TIMESTAMP DEFAULT now()
+&lt;&lt;AUC&gt;&gt;user_creation: TEXT
+&lt;&lt;ADM&gt;&gt;date_modification: TIMESTAMP
+&lt;&lt;AUM&gt;&gt;user_modification: TEXT
+&lt;&lt;ADD&gt;&gt;date_suppression: TIMESTAMP
+&lt;&lt;AMD&gt;&gt;user_suppression: TEXT
+--
+&lt;&lt;PK&gt;&gt;PK_competence(uuid)
+&lt;&lt;U-1&gt;&gt;NID1_competence_nom(uuid)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>726</y>
+      <w>216</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+Classe
+--
+&lt;&lt;PK&gt;&gt;uuid: UUID {aid}
+&lt;&lt;M&gt;&gt;&lt;&lt;VO&gt;&gt;version: INTEGER DEFAULT 1
+&lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;nom: TEXT {string}
+description: TEXT {string}
+
+&lt;&lt;ADC&gt;&gt;date_creation: TIMESTAMP DEFAULT now()
+&lt;&lt;AUC&gt;&gt;user_creation: TEXT
+&lt;&lt;ADM&gt;&gt;date_modification: TIMESTAMP
+&lt;&lt;AUM&gt;&gt;user_modification: TEXT
+&lt;&lt;ADD&gt;&gt;date_suppression: TIMESTAMP
+&lt;&lt;AMD&gt;&gt;user_suppression: TEXT
+--
+&lt;&lt;PK&gt;&gt;PK_classe(uuid)
+&lt;&lt;U-1&gt;&gt;NID1_classe_nom(nom)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>444</y>
+      <w>252</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+Personnage
+--
+&lt;&lt;PK&gt;&gt;uuid: UUID {aid}
+&lt;&lt;FK-1&gt;&gt;&lt;&lt;M&gt;&gt;classe_uuid {aid}
+&lt;&lt;M&gt;&gt;&lt;&lt;VO&gt;&gt;version: INTEGER DEFAULT 1
+&lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;nom: TEXT {string}
+&lt;&lt;NID-2&gt;&gt;code_connexion: TEXT {string}
+image: BYTEA {BLOG}
+
+&lt;&lt;ADC&gt;&gt;date_creation: TIMESTAMP DEFAULT now()
+&lt;&lt;AUC&gt;&gt;user_creation: TEXT
+&lt;&lt;ADM&gt;&gt;date_modification: TIMESTAMP
+&lt;&lt;AUM&gt;&gt;user_modification: TEXT
+&lt;&lt;ADD&gt;&gt;date_suppression: TIMESTAMP
+&lt;&lt;AMD&gt;&gt;user_suppression: TEXT
+--
+&lt;&lt;PK&gt;&gt;PK_personnage(uuid)
+&lt;&lt;FK-1&gt;&gt;FK1_classe_personnage(classe_uuid)
+&lt;&lt;U-1&gt;&gt;NID1_personnage_nom(nom)
+&lt;&lt;U-2&gt;&gt;NID2_personnage_code_connexion(code_connexion)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>174</y>
+      <w>294</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+Salle_fictive
+--
+&lt;&lt;PK&gt;&gt;uuid: UUID {aid}
+&lt;&lt;M&gt;&gt;&lt;&lt;VO&gt;&gt;version: INTEGER DEFAULT 1
+&lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;nom: TEXT {string}
+&lt;&lt;M&gt;&gt;image: BYTEA {BLOG}
+
+&lt;&lt;ADC&gt;&gt;date_creation: TIMESTAMP DEFAULT now()
+&lt;&lt;AUC&gt;&gt;user_creation: TEXT
+&lt;&lt;ADM&gt;&gt;date_modification: TIMESTAMP
+&lt;&lt;AUM&gt;&gt;user_modification: TEXT
+&lt;&lt;ADD&gt;&gt;date_suppression: TIMESTAMP
+&lt;&lt;AMD&gt;&gt;user_suppression: TEXT
+--
+&lt;&lt;PK&gt;&gt;PK_salle_fictive(uuid)
+&lt;&lt;U-1&gt;&gt;NID1_salle_fictive_nom(nom)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>648</y>
+      <w>72</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1..1
+m2=0..1
+&lt;&lt;FK-1&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;250.0;100.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>732</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1
+m1=0..n
+&lt;&lt;FK-1&gt;&gt;</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>156</x>
+      <y>360</y>
+      <w>120</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1
+m1=0..n
+&lt;&lt;FK-1&gt;&gt;</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>276</y>
+      <w>198</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..1
+m2=0..n
+&lt;&lt;FK-1&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>474</x>
+      <y>228</y>
+      <w>270</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+objet_salle_link
+--
+&lt;&lt;PFK-1&gt;&gt;&lt;&lt;M&gt;&gt;salle_fictive_uuid: UUID {aid}
+&lt;&lt;PFK-2&gt;&gt;&lt;&lt;M&gt;&gt;objet_uuid: UUID {aid}
+&lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;posX: Integer {positiveinteger}
+&lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;posY: Integer {positiveinteger}
+
+--
+&lt;&lt;PK&gt;&gt;PK_objet_salle_link(salle_fictive_uuid,objet_uuid)
+&lt;&lt;FK-1&gt;&gt;fk1_objet_salle_link_salle_fictive(salle_fictive_uuid)
+&lt;&lt;FK-2&gt;&gt;fk2_objet_salle_link_objet(objet_uuid)
+&lt;&lt;U-1&gt;&gt;NID1_link_objet(posX, posY)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>678</x>
+      <y>342</y>
+      <w>48</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..1
+m2=0..n
+&lt;&lt;FK-2&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>366</y>
+      <w>288</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+inventaire_personnage
+--
+&lt;&lt;PFK-1&gt;&gt;&lt;&lt;M&gt;&gt;personnage_uuid: UUID {aid}
+&lt;&lt;PFK-2&gt;&gt;&lt;&lt;M&gt;&gt;objet_uuid: UUID {aid}
+
+--
+&lt;&lt;PK&gt;&gt;PK_inventaire_personnage(personnage_uuid,objet_uuid)
+&lt;&lt;FK-1&gt;&gt;fk1_inventaire_personnage_personnage(personnage_uuid)
+&lt;&lt;FK-2&gt;&gt;fk2_inventaire_personnage_objet(objet_uuid)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>546</x>
+      <y>372</y>
+      <w>120</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..1
+m2=0..n
+&lt;&lt;FK-2&gt;&gt;</panel_attributes>
+    <additional_attributes>130.0;160.0;130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>672</y>
+      <w>276</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Table&gt;&gt;
+competence_classe
+--
+&lt;&lt;PFK-1&gt;&gt;&lt;&lt;M&gt;&gt;classe_uuid: UUID {aid}
+&lt;&lt;PFK-2&gt;&gt;&lt;&lt;M&gt;&gt;competence_uuid: UUID {aid}
+
+--
+&lt;&lt;PK&gt;&gt;PK_competence_classe(classe_uuid,competence_uuid)
+&lt;&lt;FK-1&gt;&gt;fk1_competence_classe_classe(classe_uuid)
+&lt;&lt;FK-2&gt;&gt;fk2_competence_classe_competence(competence_uuid)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>666</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1..1
+m1=0..n
+&lt;&lt;FK-2&gt;&gt;</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>

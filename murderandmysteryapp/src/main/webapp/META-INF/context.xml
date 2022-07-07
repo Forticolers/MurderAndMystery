@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/murderandmysteryapp"/>
+<Context path="/murderandmysteryapp">
+ <!--allowCasualMultipartParsing="true">-->
+    <!-- datasource en base de données -->
+    <!---->
+    <Resource auth="Container" driverClassName="org.postgresql.Driver" 
+              maxIdle="10" maxTotal="200" maxWait="-1" 
+              name="jdbc/db" 
+              username="murderandmystery" 
+              password="murderandmysterypass" 
+              type="javax.sql.DataSource" 
+              url="jdbc:postgresql://db.lxd:5432/murderandmysteryDB"/>
+   <!-- <ResourceLink
+		global="jdbc/db"
+		name="jdbc/db"
+		type="javax.sql.DataSource" />-->
+    <Parameter name="transactionManagerFactoryClass" override="false" 
+                value="murderandmystery.datasource.db.TransactionManagerFactory"/>
+</Context>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>220</y>
+      <w>450</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>DemoData
+--
+-salleFictives:Map&lt;Identifiant, SalleFictive&gt;
+-objets:Map&lt;Identifiant, Objet&gt;
+-personnages:Map&lt;Identifiant, Personnage&gt;
+-competences:Map&lt;Identifiant, Competence&gt;
+-classes:Map&lt;Identifiant, Classe&gt;
+
+--
++DemoaData()
++initialisation()
++getSalleFictives():Map&lt;Identifiant,SalleFictive&gt;
++getObjets():Map&lt;Identifiant, Objet&gt;
++getPersonnages():Map&lt;Identifiant, Personnage&gt;
++getCompetences():Map&lt;Identifiant, Competence&gt;
++getClasses():Map&lt;Identifiant, Classe&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

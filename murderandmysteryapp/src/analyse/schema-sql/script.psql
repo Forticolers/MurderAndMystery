@@ -1,0 +1,14 @@
+--
+-- script psql de lancement du script
+--
+-- julien jeanbourquin (julien.jeanbourquin AT hotmail.com)
+--
+\set ECHO none
+
+\i 001-dropTables.sql
+\i 002-createTables.sql
+\i 003-insertData.sql
+\set ECHO all
+--\i 004-requetes.sql
+
+\q

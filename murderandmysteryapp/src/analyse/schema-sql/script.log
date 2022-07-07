@@ -1,0 +1,170 @@
+DROP TABLE
+DROP TABLE
+DROP TABLE
+DROP TABLE
+DROP TABLE
+DROP TABLE
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+INSERT 0 4
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 9
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+lo_import 80838
+INSERT 0 1
+INSERT 0 1
+ lo_unlink 
+-----------
+         1
+(1 row)
+
+lo_import 80840
+INSERT 0 1
+ lo_unlink 
+-----------
+         1
+(1 row)
+
+INSERT 0 1
+lo_import 80842
+INSERT 0 1
+ lo_unlink 
+-----------
+         1
+(1 row)
+
+INSERT 0 1
+INSERT 0 1
+\i 004-requetes.sql
+/*
+    Recettes - requêtes utilisées dans l'interface utilisateur
+    
+    dominique huguenin (dominique.huguenin AT rpn.ch)
+
+*/
+-- Requête permettant de retourner la liste des recettes en fonction de 
+-- la valeur saisie dans le champs recherche
+SELECT nom, detail
+FROM recettes
+WHERE to_tsvector('french',nom || '  ' || detail) 
+        @@ to_tsquery('french','aubergine')
+;
+        nom         |                                                detail                                                
+--------------------+------------------------------------------------------------------------------------------------------
+ Aubergines au four | Ces aubergines gratinées garnies de tomates, feta et mûres sont un régal pour l’oeil et les papilles
+(1 row)
+
+-- requêtes permettant de retourner le détail d'une recette
+SELECT nom, detail,preparation, nombre_personnes
+FROM recettes
+WHERE uuid IN (
+        SELECT uuid
+        FROM recettes
+        WHERe to_tsvector('french',nom || '  ' || detail) @@ to_tsquery('french','aubergine'))
+;
+        nom         |                                                detail                                                |                                    preparation                                     | nombre_personnes 
+--------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------+------------------
+ Aubergines au four | Ces aubergines gratinées garnies de tomates, feta et mûres sont un régal pour l’oeil et les papilles | Préchauffer le four à 220°C.                                                      +|                4
+                    |                                                                                                      |                                                                                   +| 
+                    |                                                                                                      |   Partager les aubergines dans la longueur et, à l’aide d’un couteau, inciser     +| 
+                    |                                                                                                      |   en croisillons sur env. 2 cm de profondeur, disposer sur une plaque chemisée    +| 
+                    |                                                                                                      |   de papier cuisson. Arroser d’un filet d’huile, saler, poivrer.                  +| 
+                    |                                                                                                      |                                                                                   +| 
+                    |                                                                                                      |   Cuisson: env. 25 min au milieu du four. Retirer.                                +| 
+                    |                                                                                                      |                                                                                   +| 
+                    |                                                                                                      |   Râper le zeste du citron, presser 2 c.s. de jus, mélanger avec l’huile          +| 
+                    |                                                                                                      |   dans un grand bol, saler, poivrer. Couper les tomates en deux, émietter la feta,+| 
+                    |                                                                                                      |   effeuiller le thym, incorporer à la sauce avec les mûres, répartir sur les      +| 
+                    |                                                                                                      |   aubergines.                                                                      | 
+(1 row)
+
+SELECT c.ordre, c.quantite, u.code, i.nom, c.commentaire
+FROM composants c 
+        LEFT OUTER JOIN unites u ON c.unites_uuid = u.uuid
+        INNER JOIN ingredients i ON c.ingredients_uuid = i.uuid
+WHERE c.recettes_uuid IN (
+        SELECT uuid
+        FROM recettes
+        WHERE to_tsvector('french',nom || '  ' || detail) @@ to_tsquery('french','aubergine'))
+ORDER BY ordre        
+;
+ ordre | quantite | code |      nom      | commentaire 
+-------+----------+------+---------------+-------------
+     1 |     4.00 |      | aubergine     | d'env. 250g
+     2 |     4.00 | c.s  | huile         | 
+     3 |     0.75 | c.c  | sel           | 
+     4 |          |      | poivre        | un peu
+     5 |     1.00 |      | citron bio    | 
+     6 |     3.00 | c.s  | huile         | 
+     7 |     0.25 | c.c  | sel           | 
+     8 |          |      | poivre        | un peu
+     9 |   250.00 | g    | tomate cerise | 
+    10 |   200.00 | g    | feta          | 
+    11 |     4.00 |      | thym          | 
+    12 |   250.00 | g    | mûre          | 
+(12 rows)
+
+-- Requète permettant de retourner la liste des ingrédients en fonction de 
+-- la valeur saisie dans le champs recherche
+SELECT nom, detail
+FROM ingredients
+WHERE to_tsvector('french',nom || '  ' || detail) 
+        @@ to_tsquery('french','sauce')
+;
+       nom        |                  detail                   
+------------------+-------------------------------------------
+ sauce au tomates | Sauce tomate - avec des herbes aromatique
+(1 row)
+
+-- requêtes permettant de retourner le détail d'un ingédient
+SELECT i.nom, i.detail, r.nom recette
+FROM ingredients i
+    LEFT OUTER JOIN recettes r ON i.recettes_uuid = r.uuid
+WHERE to_tsvector('french',i.nom || '  ' || i.detail) 
+        @@ to_tsquery('french','sauce')
+;
+       nom        |                  detail                   |      recette      
+------------------+-------------------------------------------+-------------------
+ sauce au tomates | Sauce tomate - avec des herbes aromatique | Sauce aux tomates
+(1 row)
+
+-- Requête permettant de retourner la liste des unités en fonction de la valeur saisie dans le champs recherche
+SELECT code
+FROM unites
+WHERE code ~ '^c.*' 
+;        
+ code 
+------
+ c.s
+ c.c
+(2 rows)
+
+\q

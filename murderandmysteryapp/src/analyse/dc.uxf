@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>174</y>
+      <w>138</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Identifiant
+--
++getUUID():String
++getVersion():Long</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>258</x>
+      <y>78</y>
+      <w>270</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>_Murder &amp; Mystery - Diagramme de classe des interfaces_
+Julien Jeanbourquin (Julien Jeanbourquin AT hotmail.com)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>144</y>
+      <w>228</w>
+      <h>462</h>
+    </coordinates>
+    <panel_attributes>core.domain</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>276</x>
+      <y>132</y>
+      <w>1020</w>
+      <h>462</h>
+    </coordinates>
+    <panel_attributes>murderandmystery.domain</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>240</y>
+      <w>162</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>template=T:Object
+&lt;&lt;interface&gt;&gt;
+Entite
+--
++getIdendifiant():Identifiant
++getAudit():Audit
++update(T):void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>96</x>
+      <y>222</y>
+      <w>18</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>186</y>
+      <w>300</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;180.0;70.0;180.0;480.0;10.0;480.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>150</y>
+      <w>900</w>
+      <h>246</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;210.0;80.0;210.0;550.0;10.0;1480.0;10.0;1480.0;390.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>378</y>
+      <w>144</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Audit
+--
++getDateCreation():Instant
++getUserCreation():String
++getDateModification():Instant
++getUserModification():String
++getDateSupperssion():Instant
++getUserSupperssion():String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>102</x>
+      <y>348</y>
+      <w>18</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>228</y>
+      <w>246</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+SalleFictive
+--
++getNom():String
++setNom(nom: String):void
++getImage(): Byte
++setImage(byte: Byte) :void
++getObjets(): HashMap&lt;Point, Objet&gt;
++getObjet(Position) : Objet
++setObjets(objets : HashMap&lt;Position, Objet&gt;) : void
++addObjet(position : Position, objet : Objet): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>378</x>
+      <y>372</y>
+      <w>246</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Personnage
+--
++getNom():String
++setNom(nom: String):void
++getImage(): Byte
++setImage(byte: Byte) :void
++getCodeConnexion(): String
++setCodeConnexion(code: String) : void
++getClasse(): Calsse
++setClasse(classe: Classe)
++getInventaire() : List&lt;Objet&gt;
++setInventaire(objets: List&lt;Objet&gt;): void
++addObjetInventaire(objet: Objet) : void
++removeObjetInventaire(objet: Objet) : void
++removeObjetInventaire(position: Integer) : void
++listCompetence(): List&lt;Competence&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>696</x>
+      <y>432</y>
+      <w>246</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Classe
+--
++getNom():String
++setNom(nom: String):void
++getDescription(): String
++setDescription(description: String)
++getCompetences(): List&lt;Competence&gt;
++addCompetence(competence: Competence)
++removeCompetence(competence: Competence)
++setCompetence(competences: List&lt;Competence&gt;)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1008</x>
+      <y>384</y>
+      <w>246</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Competence
+--
++getNom():String
++setNom(nom: String):void
++getImage(): Byte
++setImage(byte: Byte) :void
++getCouleur(): String
++setCouleur(couleur: String)
++getRetourUser(): String
++setRetourUser(retour: String)
++getHasTarget(): Boolean
++setHasTarget(hasTarget: Boolean)
++getRetourUserTargeted(): String
++setRetourUserTargeted(retour: String)
++getCooldown(): Integer
++setCooldonw(cooldown: Integer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>702</x>
+      <y>228</y>
+      <w>246</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Objet
+--
++getNom():String
++setNom(nom: String):void
++getImage(): Byte
++setImage(byte: Byte) :void
++getDescription(): String
++setDescription(description: String)
++isRamassable(): Boolean
++setIsRamassable(isRamassable: Boolean)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>618</x>
+      <y>300</y>
+      <w>96</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+m2=0..n
+possede</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;120.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>546</x>
+      <y>186</y>
+      <w>222</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+m2=0..n
+est composé</panel_attributes>
+    <additional_attributes>320.0;70.0;320.0;20.0;10.0;20.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>936</x>
+      <y>468</y>
+      <w>84</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+m2=0..n
+utilise</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>618</x>
+      <y>402</y>
+      <w>156</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..n
+m2=1..1
+caractérise</panel_attributes>
+    <additional_attributes>210.0;50.0;210.0;20.0;10.0;20.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>156</y>
+      <w>888</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;210.0;70.0;210.0;560.0;10.0;1460.0;10.0;1290.0;460.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>162</y>
+      <w>756</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;210.0;70.0;210.0;560.0;10.0;1240.0;10.0;1240.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>234</y>
+      <w>228</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;70.0;110.0;320.0;10.0;320.0;240.0;360.0;240.0</additional_attributes>
+  </element>
+</diagram>

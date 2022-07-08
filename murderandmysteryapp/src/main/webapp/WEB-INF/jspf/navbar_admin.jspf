@@ -25,6 +25,9 @@
         <li>
             <p><a href="${pageContext.request.contextPath}/admin/salle_fictives.html">Gestion salles fictives</a></p>
         </li>
+        <li>
+            <p><a href="${pageContext.request.contextPath}/admin/salle_fictives_OLD.html">Gestion old salles fictives</a></p>
+        </li>
     </ul>
 </nav>
 

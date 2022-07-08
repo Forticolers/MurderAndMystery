@@ -27,7 +27,7 @@
                             <header>
                                 <small>${detail.identifiant.UUID}</small>
                                 <h3>
-                                    <a href="${pageContext.request.contextPath}/admin/salle_fictives/${detail.identifiant.UUID}.html">
+                                    <a href="${pageContext.request.contextPath}/admin/salle_fictives${OLD_CODE}/${detail.identifiant.UUID}.html">
                                         ${detail.nom}
                                     </a>
                                 </h3>

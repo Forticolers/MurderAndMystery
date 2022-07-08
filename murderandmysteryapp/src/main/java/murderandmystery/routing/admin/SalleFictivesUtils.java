@@ -75,19 +75,7 @@ public class SalleFictivesUtils {
     public static final String JSP_ATTRIBUT_NOM = "nom";
     public static final String JSP_ATTRIBUT_IMAGE = "image";
 
-    /* public static final String JSP_ATTRIBUT_PREPARATION = "preparation";
-    public static final String JSP_ATTRIBUT_NOMBRE_PERSONNES = "nombrePersonnes";
-    public static final String COMPOSANT_PARAMETRE_PATTERN_REGEX
-            = "composants\\[(\\d+)\\]\\d+\\.(\\w+)";
-    public static final String JSP_ATTRIBUT_COMPOSANT_UNITE_UUID = "unite_uuid";
-    public static final String JSP_ATTRIBUT_COMPOSANT_INGREDIENT_UUID = "ingredient_uuid";
-    public static final String JSP_ATTRIBUT_COMPOSANT_QUANTITE = "quantite";
-    public static final String JSP_ATTRIBUT_COMPOSANT_COMMENTAIRE = "commentaire";
-    public static final String JSP_ATTRIBUT_FOMULAIRE_COMPOSANT = "nouveauComposant";
-    public static final String JSP_ATTRIBUT_FOMULAIRE_UNITE_UUID = "nouveauComposant_unite_uuid";
-    public static final String JSP_ATTRIBUT_FOMULAIRE_INGREDIENT_UUID = "nouveauComposant_ingredient_uuid";
-    public static final String JSP_ATTRIBUT_FOMULAIRE_QUANTITE = "nouveauComposant_quantite";
-    public static final String JSP_ATTRIBUT_FOMULAIRE_COMMENTAIRE = "nouveauComposant_commentaire";*/
+   
     private static SalleFictive getDbDetail(final Identifiant id, final TransactionManager transactionManager) throws PersistenceException {
         SalleFictive detail = (SalleFictive) transactionManager
                 .executeTransaction(
@@ -120,114 +108,28 @@ public class SalleFictivesUtils {
                 .uuid(uuid)
                 .version(version)
                 .build();
-        SalleFictive detailDb = getDbDetail(identifiant, transactionManager);
+      
         String nom = request.getParameter(JSP_ATTRIBUT_NOM);
         HashMap<Point, Objet> objetsModification = new HashMap<>();
-        EtatPage etatPage = (EtatPage) request.getSession()
-                .getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_ETAT_PAGE);
-        byte[] bytesImage = null;
-        if (etatPage
-                == EtatPage.MODIFICATION) {
-            if (request.getServletContext().getAttribute("linked_objets_modification") != null) {
-                objetsModification
-                        = (HashMap<Point, Objet>) request.getServletContext().getAttribute("linked_objets_modification");
 
-            }
-            /* if (request.getServletContext().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGECONTEXT) == null) {
-                //TODO faire en sorte que les image soient lue ici pendant la modification et création.
-                 String base64EncodedImage = detailDb.getEncodedImage("UTF-8", SalleFictivesUtils.JSP_ATTRIBUT_IMAGEDATA);
-                request.setAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGEUTF8, base64EncodedImage);
-                bytesImage = detailDb.getImage();
-            } else {
-                byte[] contextBytes = (byte[]) request.getServletContext().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGECONTEXT);
-                if (!Arrays.equals(contextBytes, detailDb.getImage())) {
-                    detailDb.setImage(contextBytes);
-                }
-                String base64EncodedImage = detailDb.getEncodedImage("UTF-8", SalleFictivesUtils.JSP_ATTRIBUT_IMAGEDATA);
-                request.setAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGEUTF8, base64EncodedImage);
-                bytesImage = detailDb.getImage();
-            }*/
-        }
+        //TODO READ OBJET LINKED
+      
         SalleFictiveBase.Builder builder = SalleFictiveBase.builder()
                 .identifiant(identifiant)
                 .nom(nom)
-                //.image(bytesImage)
+               
                 .objets(objetsModification);
 
         return builder.build();
     }
 
     public static void displayImage(final SalleFictive detail, final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException {
-        if (detail.getImage() != null) {
-
-            /* byte[] encodedBytes = Base64.getEncoder().encode(detail.getImage());
-                //detail.setImage();
-                String base64EncodedImage = new String(encodedBytes, "UTF-8");*/
-            if (request.getServletContext().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGECONTEXT) == null) {
-                String base64EncodedImage = detail.getEncodedImage("UTF-8", SalleFictivesUtils.JSP_ATTRIBUT_IMAGEDATA);
-                request.setAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGEUTF8, base64EncodedImage);
-            } else {
-                byte[] contextBytes = (byte[]) request.getServletContext().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGECONTEXT);
-                if (!Arrays.equals(contextBytes, detail.getImage())) {
-                    detail.setImage(contextBytes);
-                }
-                String base64EncodedImage = detail.getEncodedImage("UTF-8", SalleFictivesUtils.JSP_ATTRIBUT_IMAGEDATA);
-                request.setAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGEUTF8, base64EncodedImage);
-            }
-
-        } else {
-            request.setAttribute(SalleFictivesUtils.JSP_ATTRIBUT_IMAGEUTF8, "");
-        }
+      
 
     }
 
     public static void displayObjets(final SalleFictive detail, HttpServletRequest request, final HttpServletResponse response) {
-        HashMap<Point, Objet> objetsTest = ((HashMap<Point, Objet>) request.getServletContext()
-                .getAttribute("linked_objets_modification") != null
-                ? ((HashMap<Point, Objet>) request.getServletContext()
-                        .getAttribute("linked_objets_modification"))
-                : new HashMap<>());
-
-        /* if (detail.getObjets().size() > 0 
-                && request.getSession().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_ETAT_PAGE) != EtatPage.MODIFICATION) {
-            /*CheckedFunction<Point, Objet> throwingConsumer = (key, value) ->{
-                request.getSession().getAttribute("linked_objets")
-            };
-            request.setAttribute("linked_objets", detail.getObjets());
-        } else if (request.getSession().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_ETAT_PAGE) == EtatPage.MODIFICATION 
-                && request.getAttribute("linked_objets_modification") != null) {
-            request.setAttribute("linked_objets",
-                    (HashMap<Point, Objet>) request.getAttribute("linked_objets_modification"));
-        }else if (request.getSession().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_ETAT_PAGE) == EtatPage.MODIFICATION 
-                && request.getAttribute("linked_objets_modification") == null && detail.getObjets().size() > 0) {
-            request.setAttribute("linked_objets",
-                   detail.getObjets());
-        }else{
-             request.setAttribute("linked_objets", null);
-        }*/
-        request.setAttribute("modObjetLinked", false);
-        CheckedFunction<Point, Objet> compareObjetLinked = (key, value) -> {
-            request.setAttribute("modObjetLinked", compareEntite(key, value, objetsTest));
-        };
-        EtatPage etatPage = (EtatPage) request.getSession().getAttribute(SalleFictivesUtils.JSP_ATTRIBUT_ETAT_PAGE);
-        if (!detail.getObjets().isEmpty() || !objetsTest.isEmpty()) {
-            if (etatPage
-                    == EtatPage.MODIFICATION
-                    && !objetsTest.isEmpty()) {
-                if (detail.getObjets().size() == objetsTest.size()) {
-                    detail.getObjets().forEach(compareObjetLinked);
-                    if (request.getAttribute("mobObjetLinked") != null) {
-                        if (!(boolean) request.getAttribute("mobObjetLinked")) {
-
-                        }
-                    }
-                }
-                detail.setObjets(objetsTest);
-            }
-
-            request.setAttribute("linked_objets", detail.getObjets());
-            request.getServletContext().removeAttribute("linked_objets_modification");
-        }
+       
 
     }
 

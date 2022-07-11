@@ -270,6 +270,7 @@ public class SalleFictiveMapperImpl
                 }
             }*/
         };
+        //TODO: Rework update algorithm.
         dbEquals = (entite.getObjets().size() == dbLinkedObjet.size());
         entite.getObjets().forEach(compareToDb);
         if (!dbEquals) {
